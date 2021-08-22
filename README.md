@@ -876,4 +876,56 @@ public class MockTest {
 
 ## <span name="mocking-test">Mocking di Test</span>
 
+- Mockito memiliki `MockitoExtention` yang bisa kita gunakan untuk integrasi dengan JUnit
+- Hal ini memudahkan kita ketika ingin membuat mock object, kita cukup gunakan `@Mock`
+- Agar terbayang bagaimana proses mock, kita akan coba kasus yang lumayan panjang
+
+### Contoh Kasus
+
+- Kita punya sebuah class model dengan nama class Person(id: String, name: String)
+- Selanjutnya kita punya interface PersonRepository sebagai interaksi ke database, dan memiliki function selectById(id:
+  String) untuk melakukan mendapatkan data Person di database
+- Dan terakhir kita memiliki class PersonService yang digunakan sebagai class bisnis logic, dimana di class tersebut
+  kita akan coba gunakan PersonRepository untuk mendapatkan data dari database, jika gagal, kita akan throw Exception
+
+```java
+
+@ExtendWith(MockitoExtension.class)
+public class PersonServiceTest {
+    @Mock
+    private PersonRepository personRepository;
+
+    private PersonService personService;
+
+    @BeforeEach
+    void setUp() {
+        personService = new PersonService(personRepository);
+    }
+
+    @Test
+    void testGetPersonNotFound() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> personService.get("none"));
+    }
+
+    @Test
+    void testGetPersonSuccess() {
+        String personId = "akbar";
+        String personName = "Akbar ganteng";
+
+        when(personRepository.selectById(personId)).thenReturn(
+                new Person(personId, personName)
+        );
+
+        Person person = personService.get(personId);
+
+        Assertions.assertNotNull(person);
+        Assertions.assertEquals(personId, person.getId());
+        Assertions.assertEquals(personName, person.getName());
+    }
+}
+```
+
+---
+
 ## <span name="verifikasi-mocking">Verifikasi Mocking</span>
