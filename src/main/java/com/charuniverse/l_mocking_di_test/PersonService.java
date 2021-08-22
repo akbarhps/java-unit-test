@@ -1,8 +1,9 @@
 package com.charuniverse.l_mocking_di_test;
 
-public class PersonService {
+import java.util.UUID;
 
-    private PersonRepository personRepository;
+public class PersonService {
+    private final PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -13,6 +14,12 @@ public class PersonService {
         if (person == null) {
             throw new IllegalArgumentException("Person Not Found!");
         }
+        return person;
+    }
+
+    public Person register(String name) {
+        Person person = new Person(UUID.randomUUID().toString(), name);
+        personRepository.insertPerson(person);
         return person;
     }
 }

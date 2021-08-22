@@ -929,3 +929,81 @@ public class PersonServiceTest {
 ---
 
 ## <span name="verifikasi-mocking">Verifikasi Mocking</span>
+
+- Pada materi sebelumnya, kita tidak melakukan verifikasi terhadap object mocking, apakah dipanggil atau tidak
+- Pada kasus sebelumnya mungkin tidak terlalu berguna karena kebetulan function nya mengembalikan value, sehingga kalo
+  kita lupa memanggil method nya, sudah pasti unit test nya gagal
+- Lantas bagaimana jika function nya tidak mengembalikan value? Alias function void
+
+### Contoh Kasus
+
+- Kita akan melanjutkan kasus sebelumnya
+- Di interface `PersonRepository` kita akan membuat method insert(person: Person) yang digunakan untuk menyimpan data ke
+  database, namun tidak mengembalikan value, alias void
+- Di class `PersonService` kita akan membuat method register(name: String) dimana akan membuat object Person dengan id
+  random, lalu menyimpan ke database via `PersonRepository`, lalu mengembalikan object person tersebut
+
+### Ada yang salah
+
+```java
+
+@ExtendWith(MockitoExtension.class)
+public class PersonServiceTest {
+    @Mock
+    private PersonRepository personRepository;
+
+    private PersonService personService;
+
+    @BeforeEach
+    void setUp() {
+        personService = new PersonService(personRepository);
+    }
+
+    @Test
+    void testRegisterPerson() {
+        String name = "Akbar ganteng";
+
+        Person person = personService.register(name);
+        Assertions.assertNotNull(person);
+        Assertions.assertNotNull(person.getId());
+        Assertions.assertEquals(name, person.getName());
+    }
+}
+```
+
+### Kenapa Salah?
+
+- Coba hapus kode `personRepository.insert(person)`
+- Maka unit test nya pun tetap sukses
+- Hal ini terjadi karena, kita tidak melakukan verifikasi bahwa mocking object dipanggil
+- Hal ini sangat berbahaya, karena jika code sampai naik ke production, bisa jadi orang yang registrasi datanya tidak
+  masuk ke database
+
+```java
+
+@ExtendWith(MockitoExtension.class)
+public class PersonServiceTest {
+    @Mock
+    private PersonRepository personRepository;
+
+    private PersonService personService;
+
+    @BeforeEach
+    void setUp() {
+        personService = new PersonService(personRepository);
+    }
+
+    @Test
+    void testRegisterPerson() {
+        String name = "Akbar ganteng";
+
+        Person person = personService.register(name);
+        Assertions.assertNotNull(person);
+        Assertions.assertNotNull(person.getId());
+        Assertions.assertEquals(name, person.getName());
+
+        // Check if personRepository.insertPerson(person) is called once when test run
+        verify(personRepository, times(1)).insertPerson(person);
+    }
+}
+```
