@@ -6,6 +6,7 @@ import org.opentest4j.TestAbortedException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.*;
 
 //@DisplayName("Test Calculator")
 @DisplayNameGeneration(SimpleDisplayNameGenerator.class)
@@ -65,5 +66,10 @@ public class CalculatorTest {
         if(profile == null || !profile.equals("DEV")) {
             throw new TestAbortedException("Not in dev env");
         }
+    }
+
+    @Test
+    public void testAssumptions() {
+        assumeTrue("DEV".equals(System.getenv("PROFILE")));
     }
 }

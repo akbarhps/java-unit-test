@@ -299,6 +299,31 @@ public class CalculatorTest {
 
 ## <span name="assumptions">Menggunakan Assumptions</span>
 
+- Sebelumnya kita sudah tahu jika ingin membatalkan test, kita bisa menggunakan `TestAbortException`
+- Namun sebenarnya ada cara yang lebih mudah, yaitu dengan menggunakan Assumptions
+- Penggunaan Assumptions mirip seperti Assertions, jika nilainya tidak sama, maka function Assumptions akan
+  throw `TestAbortedException`, sehingga secara otomatis akan membatalkan test yang sedang berjalan
+- [Official Documentation](https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assumptions.html)
+
+### Meng-import Assumptions
+
+```java
+import static org.junit.jupiter.api.Assumptions.*;
+```
+
+### Menggunakan Assumptions
+
+```java
+public class CalculatorTest {
+    @Test
+    public void testAssumptions() {
+        assumeTrue("DEV".equals(System.getenv("PROFILE")));
+    }
+}
+```
+
+---
+
 ## <span name="test-kondisional">Test Berdasarkan Kondisi</span>
 
 ## <span name="menggunakan-tag">Menggunakan Tag</span>
