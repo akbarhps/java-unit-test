@@ -279,6 +279,24 @@ public class CalculatorTest {
 
 ## <span name="membatalkan-test">Membatalkan Test</span>
 
+- Kadang kita ingin membatalkan unit test ketika kondisi tertentu terjadi
+- Untuk membatalkan, kita bisa menggunakan exception `TestAbortedException`
+- Jika JUnit mendapatkan exception `TestAbortedException`, secara otomatis test tersebut akan dibatalkan
+
+```java
+public class CalculatorTest {
+    @Test
+    public void testAborted() {
+        String profile = System.getenv("PROFILE");
+        if (profile == null || !profile.equals("DEV")) {
+            throw new TestAbortedException("Not in dev env");
+        }
+    }
+}
+```
+
+---
+
 ## <span name="assumptions">Menggunakan Assumptions</span>
 
 ## <span name="test-kondisional">Test Berdasarkan Kondisi</span>

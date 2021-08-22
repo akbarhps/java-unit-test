@@ -2,6 +2,7 @@ package com.charuniverse.a_membuat_test;
 
 import com.charuniverse.b_display_name_generator.SimpleDisplayNameGenerator;
 import org.junit.jupiter.api.*;
+import org.opentest4j.TestAbortedException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -56,5 +57,13 @@ public class CalculatorTest {
     @Disabled
     public void testNotImplemented() {
         // not yet implemented
+    }
+
+    @Test
+    public void testAborted() {
+        String profile = System.getenv("PROFILE");
+        if(profile == null || !profile.equals("DEV")) {
+            throw new TestAbortedException("Not in dev env");
+        }
     }
 }
