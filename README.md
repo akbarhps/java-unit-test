@@ -676,6 +676,50 @@ public class AbstractCalculatorTest {
 
 ## <span name="test-berulang">Test Berulang</span>
 
+- JUnit mendukung eksekusi unit test berulang kali sesuai dengan jumlah yang kita tentukan
+- Untuk mengulang eksekusi unit test, kita bisa menggunakan annotation `@RepeatedTest` di method unit test nya
+- `@RepeatedTest` juga bisa digunakan untuk mengubah detail nama test nya, dan kita bisa menggunakan
+  value `{displayName}`
+  untuk mendapatkan display name, `{currentRepetition}` untuk mendapatkan perulangan ke berapa saat ini,
+  dan `{totalRepetitions}` untuk mendapatkan total perulangan nya
+
+```java
+public class RandomCalculatorTest extends AbstractCalculatorTest {
+    @RepeatedTest(
+            value = 10,
+            name = "{displayName} iterasi ke {currentRepetition} dari total {totalRepetitions}"
+    )
+    void testRandomRepeat(Random random) {
+        var a = random.nextInt();
+        var b = random.nextInt();
+        var result = calculator.add(a, b);
+        var expected = a + b;
+        Assertions.assertEquals(expected, result);
+    }
+}
+```
+
+### Informasi Perulangan
+
+- `@RepeatedTest` juga memiliki object `RepetitionInfo` yang di inject oleh class `RepetitionInfoParameterResolver`,
+  sehingga kita bisa mendapatkan informasi `RepetitionInfo` melalui parameter function unit test
+
+```java
+public class RandomCalculatorTest extends AbstractCalculatorTest {
+    @RepeatedTest(value = 10)
+    void testRandomRepeatInfo(Random random, RepetitionInfo info) {
+        System.out.println(info.getCurrentRepetition() + " from " + info.getTotalRepetitions());
+        var a = random.nextInt();
+        var b = random.nextInt();
+        var result = calculator.add(a, b);
+        var expected = a + b;
+        Assertions.assertEquals(expected, result);
+    }
+}
+```
+
+---
+
 ## <span name="test-parameter">Test dengan Parameter</span>
 
 ## <span name="timeout">Timeout di Test</span>
