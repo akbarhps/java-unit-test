@@ -432,6 +432,33 @@ public class ConditionTest {
 
 ## <span name="menggunakan-tag">Menggunakan Tag</span>
 
+- Class atau function unit test bisa kita tambahkan tag (tanda) dengan menggunakan annotation `@Tag`
+- Dengan menambahkan tag ke dalam unit test, kita bisa fleksibel ketika menjalankan unit test, bisa memilih tag mana
+  yang mau di include atau di exclude
+- Jika kita menambahkan tag di class unit test, secara otomatis semua function unit test di dalam class tersebut akan
+  memiliki tag tersebut
+- JIka kita ingin menambahkan beberapa tag di satu class atau function unit test, kita bisa menggunakan
+  annotation `@Tags`
+
+### Menambahkan Tag
+
+```java
+@Tags({
+        @Tag("integration-test")
+})
+public class SampleIntegrationTest {
+    @Test
+    void test1() {
+    }
+}
+```
+
+### Menjalankan Test Berdasarkan Tag dengan Maven
+
+`mvn test -Dgroups=namatag`
+
+---
+
 ## <span name="urutan-eksekusi">Urutan Eksekusi Test</span>
 
 ## <span name="siklus-hidup">Siklus Hidup Test</span>
