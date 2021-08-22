@@ -96,15 +96,37 @@ Sebelum Belajar Materi Ini:
 
 ### `mvn archetype:generate`
 
-![mvn archetype:generate](https://user-images.githubusercontent.com/69947442/130352044-e3b9f9aa-3170-4832-9ed9-feaf1a519506.png)
+![mvn archetype:generate](https://user-images.githubusercontent.com/69947442/130352056-feae52cf-92bb-4746-ac83-50a3ca068dae.png)
 
 ### `mvn-archetype-quickstart`
 
-![mvn-archetype-quickstart](https://user-images.githubusercontent.com/69947442/130352056-feae52cf-92bb-4746-ac83-50a3ca068dae.png)
+![mvn-archetype-quickstart](https://user-images.githubusercontent.com/69947442/130352044-e3b9f9aa-3170-4832-9ed9-feaf1a519506.png)
 
 ### [Maven Central JUnit](https://search.maven.org/artifact/org.junit.jupiter/junit-jupiter)
 
+---
+
 ## <span name="membuat-test">Membuat Test</span>
+
+- Untuk membuat test di JUnit itu sederhana, kita cukup membuat class, lalu menambahkan method-method testnya
+- Method akan di anggap sebuah test jika ditambahkan annotation `@Test`
+- Kode test disimpan dibagian test folder di maven, bukan di main folder
+- Biasanya saat membuat class untuk test, rata-rata orang biasa membuat nama classnya sama dengan nama class yang akan
+  di test, tapi diakhiri dengan kata Test, misal nama classnya adalah Calculator, maka nama class testnya adalah
+  CalculatorTest
+
+### Kode
+
+```java
+public class CalculatorTest {
+    public static final Calculator calculator = new Calculator();
+
+    @Test
+    public void testAddSuccess() {
+        int result = calculator.add(5, 15);
+    }
+}
+```
 
 ## <span name="assertions">Menggunakan Assertions</span>
 
