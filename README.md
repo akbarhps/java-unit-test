@@ -443,9 +443,8 @@ public class ConditionTest {
 ### Menambahkan Tag
 
 ```java
-@Tags({
-        @Tag("integration-test")
-})
+
+@Tag("integration-test")
 public class SampleIntegrationTest {
     @Test
     void test1() {
@@ -460,6 +459,40 @@ public class SampleIntegrationTest {
 ---
 
 ## <span name="urutan-eksekusi">Urutan Eksekusi Test</span>
+
+- Secara default, urutan eksekusi unit test tidak ditentukan, jadi jangan berharap jika sebuah method berada di atas
+  method lainnya, maka akan dijalankan lebih dulu
+- Hal ini karena memang sebaiknya method unit test itu harus independen, tidak saling ketergantungan
+- Secara default pun, object class unit test akan selalu dibuat ulang tiap method, jadi jangan berharap kita bisa
+  menyimpan data di variable untuk digunakan di unit test method selanjutnya
+
+### Mengubah Urutan Eksekusi Test
+
+- JUnit mendukung perubahan urutan eksekusi test jika kita mau menggunakan annotation `@TestMethodOrder`, ada beberapa
+  cara yang bisa kita lakukan
+- Alphanumeric, artinya urutan eksekusi unit test akan diurutkan berdasarkan alphanumeric (deprecated)
+- MethodName, artinya urutan eksekusi unit test akan diurutkan berdasarkan nama method
+- Random, artinya urutan eksekusi unit test akan dieksekusi secara random
+- OrderAnnotation, artinya urutan eksekusi unit test akan mengikuti annotation `@Order` yang ada di tiap method unit
+  test
+
+```java
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class OrderedTest {
+    @Test
+    @Order(1)
+    void test3() {
+    }
+
+    @Test
+    @Order(3)
+    void test2() {
+    }
+}
+```
+
+---
 
 ## <span name="siklus-hidup">Siklus Hidup Test</span>
 
