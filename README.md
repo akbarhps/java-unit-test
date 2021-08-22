@@ -591,6 +591,59 @@ public class InformationTest {
 
 ## <span name="dependency-injection">Dependency Injection di Test</span>
 
+- Tidak ada magic di JUnit, sebenarnya fitur TestInfo yang sebelumnya kita bahas adalah bagian dari Dependency Injection
+  di JUnit
+- Dependency Injection secara sederhana adalah bagaimana kita bisa memasukkan dependency (object/instance) ke dalam unit
+  test secara otomatis tanpa proses manual
+- Saat kita menambah parameter di function unit test, sebenarnya kita bisa secara otomatis memasukkan parameter tersebut
+  dengan bantuan `ParameterResolver`
+- Contohnya TestInfo yang kita bahas sebelumnya, sebenarnya objectnya dibuat oleh `TestInfoParameterResolver`
+
+### Membuat Parameter Resolver
+
+```java
+public class RandomParameterResolver implements ParameterResolver {
+    private Random random = new Random();
+
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return parameterContext.getParameter().getType() == Random.class;
+    }
+
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return random;
+    }
+}
+```
+
+### Menggunakan Parameter Resolver
+
+- Untuk menggunakan Parameter Resolver yang sudah kita buat, kita bisa menggunakan annotation `@ExtendWith` di test
+  class
+- Jika lebih dari 1 Parameter Resolver, kita bisa menggunakan `@Extensions`
+
+```java
+
+@Extensions({
+        @ExtendWith(RandomParameterResolver.class)
+})
+public class RandomCalculatorTest {
+    private final Calculator calculator = new Calculator();
+
+    @Test
+    void testRandom(Random random) {
+        var a = random.nextInt();
+        var b = random.nextInt();
+        var result = calculator.add(a, b);
+        var expected = a + b;
+        Assertions.assertEquals(expected, result);
+    }
+}
+```
+
+---
+
 ## <span name="pewarisan-test">Pewarisan Test</span>
 
 ## <span name="test-berulang">Test Berulang</span>
