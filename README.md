@@ -1,6 +1,8 @@
-# [Java Unit Test]()
+# [Java Unit Test](https://akbarhps.github.io/java-unit-test/)
 
-In computer programming, unit testing is a software testing method by which individual units of source code—sets of one or more computer program modules together with associated control data, usage procedures, and operating procedures—are tested to determine whether they are fit for use. [Wikipedia](https://en.wikipedia.org/wiki/Unit_testing)
+In computer programming, unit testing is a software testing method by which individual units of source code—sets of one
+or more computer program modules together with associated control data, usage procedures, and operating procedures—are
+tested to determine whether they are fit for use. [Wikipedia](https://en.wikipedia.org/wiki/Unit_testing)
 
 [Official User Guide](https://junit.org/junit5/docs/current/user-guide/)
 
@@ -43,3 +45,85 @@ Sebelum Belajar Materi Ini:
 - [Pengenalan Mocking](#pengenalan-mocking)
 - [Mocking di Test](#mocking-test)
 - [Verifikasi di Mocking](#verifikasi-mocking)
+
+---
+
+## <span name="pengenalan-test">Pengenalan Software Testing</span>
+
+- Software testing adalah salah satu disiplin ilmu dalam software engineering
+- Tujuan utama dari software testing adalah memastikan kualitas kode dan aplikasi kita baik
+- Ilmu untuk software testing sendiri sangatlah luas, pada materi ini kita hanya akan fokus ke unit testing
+
+### Test Pyramid
+
+![Test Pyramid](https://user-images.githubusercontent.com/69947442/130351720-2aa486fd-0d80-4c8f-bd60-94b1577a76d8.png)
+
+### Contoh High Level Architecture
+
+![Contoh High Level Architecture](https://user-images.githubusercontent.com/69947442/130351719-bf046083-efe4-4302-ab3b-8178657da2d4.png)
+
+### UI Test/End to End Test
+
+![UI Test/End to End Test](https://user-images.githubusercontent.com/69947442/130351716-6a687abb-3a65-40ba-b97a-cb9c66a85b25.png)
+
+### Service Test/Integration Test
+
+![Service Test/Integration Test](https://user-images.githubusercontent.com/69947442/130351715-729cd059-bdd0-40e3-a3a0-b3c3cbc17aed.png)
+
+### Contoh Internal Architecture Aplikasi
+
+![Contoh Internal Architecture Aplikasi](https://user-images.githubusercontent.com/69947442/130351713-d4f24a66-b033-4b5e-98ea-a1c90db5ff93.png)
+
+### Unit Test
+
+![Unit Test](https://user-images.githubusercontent.com/69947442/130351711-44986ea7-e429-41ed-9a90-02939e84f104.png)
+
+- Unit test akan fokus menguji bagian kode program terkecil, biasanya menguji sebuah class dan method
+- Unit test biasanya dibuat kecil dan cepat, oleh karena itu biasanya kadang kode unit test lebih banyak dari kode program aslinya, karena semua skenario pengujian akan dicoba di unit test
+- Unit test bisa digunakan sebagai cara untuk meningkatkan kualitas kode program kita
+
+## <span name="pengenalan-junit">Pengenalan JUnit</span>
+
+## <span name="membuat-test">Membuat Test</span>
+
+## <span name="assertions">Menggunakan Assertions</span>
+
+## <span name="mengubah-nama">Mengubah Nama Test</span>
+
+## <span name="nonaktifkan-test">Menonaktifkan Test</span>
+
+## <span name="sebelum-setelah-test">Sebelum & Setelah Test</span>
+
+## <span name="membatalkan-test">Membatalkan Test</span>
+
+## <span name="assumptions">Menggunakan Assumptions</span>
+
+## <span name="test-kondisional">Test Berdasarkan Kondisi</span>
+
+## <span name="menggunakan-tag">Menggunakan Tag</span>
+
+## <span name="urutan-eksekusi">Urutan Eksekusi Test</span>
+
+## <span name="siklus-hidup">Siklus Hidup Test</span>
+
+## <span name="test-didalam-test">Test di dalam Test</span>
+
+## <span name="informasi-test">Informasi Test</span>
+
+## <span name="dependency-injection">Dependency Injection di Test</span>
+
+## <span name="pewarisan-test">Pewarisan Test</span>
+
+## <span name="test-berulang">Test Berulang</span>
+
+## <span name="test-parameter">Test dengan Parameter</span>
+
+## <span name="timeout">Timeout di Test</span>
+
+## <span name="test-paralel">Eksekusi Test Secara Paralel</span>
+
+## <span name="pengenalan-mocking">Pengenalan Mocking</span>
+
+## <span name="mocking-test">Mocking di Test</span>
+
+## <span name="verifikasi-mocking">Verifikasi Mocking</span>
