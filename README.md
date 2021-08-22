@@ -128,7 +128,54 @@ public class CalculatorTest {
 }
 ```
 
+---
+
 ## <span name="assertions">Menggunakan Assertions</span>
+
+- Saat membuat test, kita harus memastikan bahwa test tersebut sesuai dengan ekspektasi yang kita inginkan
+- Jika manual, kita bisa melakukan pengecekan if else, namun itu tidak direkomendasikan
+- JUnit memiliki fitur untuk melakukan assertions, yaitu memastikan bahwa unit test sesuai dengan kondisi yang kita
+  inginkan
+- Assertions di JUnit di representasikan dalam class Assertions, dan di dalamnya terdapat banyak sekali function static
+- [Official Documentation](https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/Assertions.html)
+
+### Meng-import Assertions
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+```
+
+### Menggunakan Assertions
+
+```java
+public class CalculatorTest {
+    public static final Calculator calculator = new Calculator();
+
+    @Test
+    public void testAddSuccess() {
+        int result = calculator.add(5, 15);
+        assertEquals(20, result);
+    }
+}
+```
+
+### Menggagalkan Test
+
+- Kadang dalam membuat unit test, kita tidak hanya ingin mengetest kasus sukses atau gagal
+- Ada kalanya kita ingin mengetes sebuah exception misalnya
+- Assertions juga bisa digunakan untuk mengecek apakah sebuah exception terjadi
+
+```java
+public class CalculatorTest {
+    public static final Calculator calculator = new Calculator();
+
+    @Test
+    public void testDivideFailed() {
+        assertThrows(IllegalArgumentException.class,
+                () -> calculator.divide(100, 0));
+    }
+}
+```
 
 ## <span name="mengubah-nama">Mengubah Nama Test</span>
 
