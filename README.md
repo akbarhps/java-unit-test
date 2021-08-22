@@ -79,10 +79,30 @@ Sebelum Belajar Materi Ini:
 ![Unit Test](https://user-images.githubusercontent.com/69947442/130351711-44986ea7-e429-41ed-9a90-02939e84f104.png)
 
 - Unit test akan fokus menguji bagian kode program terkecil, biasanya menguji sebuah class dan method
-- Unit test biasanya dibuat kecil dan cepat, oleh karena itu biasanya kadang kode unit test lebih banyak dari kode program aslinya, karena semua skenario pengujian akan dicoba di unit test
+- Unit test biasanya dibuat kecil dan cepat, oleh karena itu biasanya kadang kode unit test lebih banyak dari kode
+  program aslinya, karena semua skenario pengujian akan dicoba di unit test
 - Unit test bisa digunakan sebagai cara untuk meningkatkan kualitas kode program kita
 
+---
+
 ## <span name="pengenalan-junit">Pengenalan JUnit</span>
+
+- JUnit adalah test framework yang paling populer di Java
+- Saat ini versi terbaru JUnit adalah versi 5
+- JUnit 5 membutuhkan minimal Java versi 8
+- [Official Website](https://junit.org/)
+
+### Membuat Project Menggunakan Maven
+
+### `mvn archetype:generate`
+
+![mvn archetype:generate](https://user-images.githubusercontent.com/69947442/130352044-e3b9f9aa-3170-4832-9ed9-feaf1a519506.png)
+
+### `mvn-archetype-quickstart`
+
+![mvn-archetype-quickstart](https://user-images.githubusercontent.com/69947442/130352056-feae52cf-92bb-4746-ac83-50a3ca068dae.png)
+
+### [Maven Central JUnit](https://search.maven.org/artifact/org.junit.jupiter/junit-jupiter)
 
 ## <span name="membuat-test">Membuat Test</span>
 
