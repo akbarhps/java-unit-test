@@ -533,6 +533,36 @@ public class LifecycleTest {
 
 ## <span name="test-didalam-test">Test di dalam Test</span>
 
+- Saat membuat unit test, ada baiknya ukuran test class nya tidak terlalu besar, karena akan sulit di baca dan di
+  mengerti
+- Jika test class sudah semakin besar, ada baiknya kita pecah menjadi beberapa test class, lalu kita grouping sesuai
+  dengan jenis method testnya
+- JUnit mendukung pembuatan class test di dalam class test, jadi kita bisa memecah sebuah class test, tanpa harus
+  membuat class di file berbeda, kita bisa cukup menggunakan inner class
+- Untuk memberi tahu bahwa inner class tersebut adalah test class, kita bisa menggunakan annotation `@Nested`
+
+```java
+public class QueueTest {
+    private Queue<String> queue;
+
+    @Nested
+    public class WhenOffer {
+        @BeforeEach
+        void setUp() {
+            queue = new LinkedList<>();
+        }
+
+        @Test
+        void testWhenOfferSizeMustBeIncreasing() {
+            queue.offer("Hello");
+            Assertions.assertEquals(1, queue.size());
+        }
+    }
+}
+```
+
+---
+
 ## <span name="informasi-test">Informasi Test</span>
 
 ## <span name="dependency-injection">Dependency Injection di Test</span>
