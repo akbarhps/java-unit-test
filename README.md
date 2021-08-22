@@ -565,6 +565,30 @@ public class QueueTest {
 
 ## <span name="informasi-test">Informasi Test</span>
 
+- Walaupun mungkin jarang kita gunakan, tapi kita juga bisa mendapatkan informasi test yang sedang berjalan menggunakan
+  interface `TestInfo`
+- Kita bisa menambahkan `TestInfo` sebagai parameter di function unit test
+
+![TestInfo Interface](https://user-images.githubusercontent.com/69947442/130357251-0776454b-fa95-492c-a40a-1628dfe60430.png)
+
+```java
+
+@DisplayName("Information Test")
+public class InformationTest {
+    @Test
+    @DisplayName("This is test 1")
+    @Tags({
+            @Tag("Test1"),
+            @Tag("Test2"),
+    })
+    void test1(TestInfo info) {
+        System.out.println(info);
+    }
+}
+```
+
+---
+
 ## <span name="dependency-injection">Dependency Injection di Test</span>
 
 ## <span name="pewarisan-test">Pewarisan Test</span>
