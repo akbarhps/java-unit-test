@@ -1,10 +1,7 @@
 package com.charuniverse.a_membuat_test;
 
 import com.charuniverse.b_display_name_generator.SimpleDisplayNameGenerator;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,6 +10,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayNameGeneration(SimpleDisplayNameGenerator.class)
 public class CalculatorTest {
     public static final Calculator calculator = new Calculator();
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Run Before All");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("Run After All");
+    }
+
+    @BeforeEach
+    void setUp() {
+        System.out.println("Run Before Each");
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("Run After Each");
+    }
 
     @Test
 //    @DisplayName("Test calculator.add(a, b) success")
