@@ -326,6 +326,110 @@ public class CalculatorTest {
 
 ## <span name="test-kondisional">Test Berdasarkan Kondisi</span>
 
+- Sebenarnya kita bisa menggunakan Assumptions untuk menjalankan unit test berdasarkan kondisi tertentu
+- Namun JUnit menyediakan fitur yang lebih mudah untuk pengecekan beberapa kondisi, seperti kondisi sistem operasi,
+  versi java, system property atau environment variable
+- Ini lebih mudah dibandingkan menggunakan Assumptions
+
+### Kondisi Sistem Operasi
+
+- Untuk kondisi sistem operasi, kita bisa menggunakan beberapa annotation
+- `@EnabledOnOs` digunakan untuk penanda bahwa unit test berjalan di sistem operasi yang di tentukan
+- `@DisabledOnOs` digunakan untuk penanda bahwa unit test tidak boleh berjalan di sistem operasi yang di tentukan
+
+```java
+public class ConditionTest {
+    @Test
+    @EnabledOnOs({OS.WINDOWS})
+    public void testRunOnWindows() {
+    }
+
+    @Test
+    @DisabledOnOs({OS.WINDOWS})
+    public void testDisableOnWindows() {
+    }
+}
+```
+
+### Kondisi Versi Java
+
+- Untuk kondisi versi Java yang kita gunakan, kita bisa menggunakan beberapa annotation
+- `@EnabledOnJre` digunakan untuk penanda bahwa unit test boleh berjalan di Java versi tertentu
+- `@DisbledOnJre` digunakan untuk penanda bahwa unit test tidak boleh berjalan di Java versi tertentu
+- `@EnabledForJreRange` digunakan untuk penanda bahwa unit test boleh berjalan di range Java versi tertentu
+- `@DisabledForJreRange` digunakan untuk penanda bahwa unit test tidak boleh berjalan di range Java versi tertentu
+
+```java
+public class ConditionTest {
+    @Test
+    @EnabledForJreRange(min = JRE.JAVA_11, max = JRE.JAVA_15)
+    public void testEnableOnJava11To15() {
+    }
+
+    @Test
+    @DisabledForJreRange(min = JRE.JAVA_11, max = JRE.JAVA_15)
+    public void testDisableOnJava11To15() {
+    }
+}
+```
+
+### Kondisi System Property
+
+- Untuk kondisi nilai dari system property, kita bisa menggunakan beberapa annotation
+- `@EnabledIfSystemProperty` untuk penanda bahwa unit test boleh berjalan jika system property sesuai dengan yang
+  ditentukan
+- `@DisabledIfSystemProperty` untuk penanda bahwa unit test tidak boleh berjalan jika system property sesuai dengan yang
+  ditentukan
+- Jika kondisinya lebih dari satu, kita bisa menggunakan `@EnabledIfSystemProperties` dan `@DisabledIfSystemProperties`
+
+```java
+public class ConditionTest {
+    @Test
+    @EnabledIfSystemProperties(
+            @EnabledIfSystemProperty(named = "java.vendor", matches = "Oracle Corporation")
+    )
+    void testEnabledOnJavaOracle() {
+    }
+
+    @Test
+    @DisabledIfSystemProperties(
+            @DisabledIfSystemProperty(named = "java.vendor", matches = "Oracle Corporation")
+    )
+    void testDisabledOnJavaOracle() {
+    }
+}
+```
+
+### Kondisi Environment Variable
+
+- Untuk kondisi nilai dari environment variable, kita bisa menggunakan beberapa annotation
+- `@EnabledIfEnvironmentVariable` untuk penanda bahwa unit test boleh berjalan jika environment variable sesuai dengan
+  yang ditentukan
+- `@DisabledIfEnvironmentVariable` untuk penanda bahwa unit test tidak boleh berjalan jika environment variable sesuai
+  dengan yang ditentukan
+- Jika kondisi lebih dari satu, kita bisa menggunakan `@EnabledIfEnvironmentVariables`
+  dan `@DisabledIfEnvironmentVariables`
+
+```java
+public class ConditionTest {
+    @Test
+    @EnabledIfEnvironmentVariables({
+            @EnabledIfEnvironmentVariable(named = "PROFILE", matches = "DEV")
+    })
+    void testEnabledOnDev() {
+    }
+
+    @Test
+    @DisabledIfEnvironmentVariables({
+            @DisabledIfEnvironmentVariable(named = "PROFILE", matches = "DEV")
+    })
+    void testDisabledOnDev() {
+    }
+}
+```
+
+---
+
 ## <span name="menggunakan-tag">Menggunakan Tag</span>
 
 ## <span name="urutan-eksekusi">Urutan Eksekusi Test</span>
